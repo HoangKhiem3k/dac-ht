@@ -23,15 +23,6 @@ export const useCommonStore = defineStore({
         ? this.progressLoading--
         : (this.progressLoading = 0);
     },
-    // setToastError(error: any) {
-    //   this.setToastMessage({
-    //     icon: "mdi-block-helper",
-    //     show: true,
-    //     timeout: 3000,
-    //     color: 'red-darken-2',
-    //     messages: [error.message]
-    //   });
-    // },
     setToastError(text: string) {
       this.setToastMessage({
         icon: "mdi-block-helper",

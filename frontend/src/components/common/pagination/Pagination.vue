@@ -1,27 +1,16 @@
-<script lang="" setup>
-import { ref, computed, onMounted } from "vue";
+<script setup lang="ts">
+import { ref, computed, onMounted, watch } from "vue";
 
-const props = defineProps({
-  totalRecords: {
-    type: Number,
-    default: 0,
-  },
-  pageNumber: {
-    type: Number,
-    default: 1,
-  },
-  pageSize: {
-    type: Number,
-    default: 10,
-  },
-  pageSizeOptions: {
-    type: Array,
-    default: 0,
-  },
-});
+const props = defineProps<{
+  totalRecords: number;
+  pageNumber: number;
+  pageSize: number;
+  pageSizeOptions: Array;
+}>();
 const emit = defineEmits(["handleChangePageOption"]);
-const pageNumber = ref(props.pageNumber);
-const pageSize = ref(props.pageSize);
+const pageNumber = ref<number>(props.pageNumber);
+
+const pageSize = ref<number>(props.pageSize);
 const totalPage = computed(() =>
   Math.ceil(props.totalRecords / pageSize.value)
 );

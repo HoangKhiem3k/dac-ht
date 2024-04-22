@@ -5,8 +5,11 @@ import { useCustomerStore } from "../../stores/customer";
 import TagFilter from "../tag/TagFilter.vue";
 import CommonButton from "../common/button/CommonButton.vue";
 import { useField, useForm } from "vee-validate";
-const customerStore = useCustomerStore();
+import { type Customer } from "@/types/customer";
+import { type Tag } from "@/types/tag";
 
+const customerStore = useCustomerStore();
+const emit = defineEmits(["handleResetPageNumber"]);
 // Handle add customer
 const showModalAddCustomer = ref<boolean>(false);
 // Handle search customer
@@ -17,7 +20,7 @@ const handleChangeInputCustomerName = () => {
     customerName: customerName.value,
   });
 };
-const getTagInfoForFilterCustomer = (tags) => {
+const getTagInfoForFilterCustomer = (tags: Tag[]) => {
   const filteredTagIds = tags.filter((obj) => obj.id !== null);
   customerStore.setSearchParams({
     ...customerStore.searchParams,
@@ -26,7 +29,7 @@ const getTagInfoForFilterCustomer = (tags) => {
 };
 const { handleSubmit, handleReset } = useForm({
   validationSchema: {
-    insertDateFrom(value) {
+    insertDateFrom(value: string) {
       if (
         insertDateTo.value.value &&
         new Date(value) > new Date(insertDateTo.value.value)
@@ -35,7 +38,7 @@ const { handleSubmit, handleReset } = useForm({
       }
       return true;
     },
-    insertDateTo(value) {
+    insertDateTo(value: string) {
       if (
         insertDateFrom.value.value &&
         new Date(value) < new Date(insertDateFrom.value.value)
@@ -44,7 +47,7 @@ const { handleSubmit, handleReset } = useForm({
       }
       return true;
     },
-    updateDateFrom(value) {
+    updateDateFrom(value: string) {
       if (
         updateDateTo.value.value &&
         new Date(value) > new Date(updateDateTo.value.value)
@@ -53,7 +56,7 @@ const { handleSubmit, handleReset } = useForm({
       }
       return true;
     },
-    updateDateTo(value) {
+    updateDateTo(value: string) {
       if (
         updateDateFrom.value.value &&
         new Date(value) < new Date(updateDateFrom.value.value)
@@ -69,6 +72,7 @@ const insertDateTo = useField("insertDateTo");
 const updateDateFrom = useField("updateDateFrom");
 const updateDateTo = useField("updateDateTo");
 const handleSearch = handleSubmit((values) => {
+  emit("handleResetPageNumber");
   customerStore.setSearchParams({
     ...customerStore.searchParams,
     pageNum: 0,
@@ -212,3 +216,7 @@ const handleSearch = handleSubmit((values) => {
   }
 }
 </style>
+: any[]: { id: null; }: { id: any; }: string | number | Date: string | number |
+Date: string | number | Date: string | number | Date(: any)(: any)(: any):
+any[]: { id: null; }: { id: any; }: string | number | Date: string | number |
+Date: string | number | Date: string | number | Date(: any)(: any)(: any)

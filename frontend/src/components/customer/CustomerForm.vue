@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useField, useForm } from "vee-validate";
 import { useCustomerStore } from "../../stores/customer";
-import { type TagCreate, type Tag } from "@/types/tag";
+import { type Tag } from "@/types/tag";
 import TagFilter from "../tag/TagFilter.vue";
 import CommonButton from "../common/button/CommonButton.vue";
 
@@ -32,7 +32,7 @@ const emit = defineEmits(["hideModal"]);
 const customerStore = useCustomerStore();
 const { handleSubmit, handleReset } = useForm({
   validationSchema: {
-    name(value) {
+    name(value: string) {
       if (value && value.length >= 2 && value.length <= 20) return true;
       if (!value) {
         return "Name is required.";
@@ -80,7 +80,7 @@ const handleCreateCustomer = () => {
   emit("hideModal");
   customerStore.addCustomer(dataCustomerCreate);
 };
-const getTagInfoForCreateCustomer = (tags) => {
+const getTagInfoForCreateCustomer = (tags: Tag[]) => {
   tagsSelected.value = tags;
 };
 </script>

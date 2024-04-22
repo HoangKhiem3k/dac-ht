@@ -13,7 +13,7 @@ export const useTagStore = defineStore({
   }),
   actions: {
     // Get tags
-    async getTags(tagName) {
+    async getTags(tagName: string) {
       const { setProgressLoading } = useCommonStore();
       setProgressLoading(true);
       try {

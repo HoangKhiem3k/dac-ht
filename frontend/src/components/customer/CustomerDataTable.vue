@@ -3,10 +3,10 @@ import { ref, onMounted, computed } from "vue";
 import ConfirmModal from "../common/modal/ConfirmModal.vue";
 import CustomerForm from "./CustomerForm.vue";
 import Modal from "../common/modal/Modal.vue";
-import Pagination from "../common/pagination/Pagination.vue";
 import Tag from "../tag/Tag.vue";
 import { useCustomerStore } from "../../stores/customer";
 import { type Customer } from "@/types/customer";
+import { type SortParams } from "@/types/filter";
 
 const customerStore = useCustomerStore();
 onMounted(() => {
@@ -18,8 +18,8 @@ const customersList = computed(() => customerStore.customers);
 const showModalConfirm = ref<boolean>(false);
 const showModalUpdateCustomer = ref<boolean>(false);
 const customerDeleteId = ref<number>(0);
-const customerDetail = ref(null);
-const openModalConfirmDelete = (id) => {
+const customerDetail = ref<Customer>(null);
+const openModalConfirmDelete = (id: number) => {
   showModalConfirm.value = true;
   customerDeleteId.value = id;
 };
@@ -27,30 +27,16 @@ const handleDeleteCustomer = () => {
   showModalConfirm.value = false;
   customerStore.deleteCustomer(customerDeleteId.value);
 };
-const openModalUpdateCustomer = (customer) => {
+const openModalUpdateCustomer = (customer: Customer) => {
   showModalUpdateCustomer.value = true;
   customerDetail.value = customer;
 };
 
-// Handle paginate
-const totalRecords = computed(() => customerStore.totalCustomers);
-const pageNumber = ref(1);
-const pageSize = ref(10);
-const pageSizeOptions = ref([10, 20, 50]);
-const handleChangePageOption = (page) => {
-  customerStore.setSearchParams({
-    ...customerStore.searchParams,
-    pageNum: page.pageNumber,
-    pageSize: page.pageSize,
-  });
-  customerStore.getCustomers();
-};
-// Handle paginate
 // Handle sort
-
 const sortDefault = computed(() => customerStore.searchParams.sort);
-const sort = ref(sortDefault);
-const sortTable = (property) => {
+const sort = ref<SortParams>(sortDefault);
+console.log("🚀 ~ sort:", sort.value);
+const sortTable = (property: string) => {
   sort.value.property = property;
   sort.value.asc = !sort.value.asc;
   customerStore.setSearchParams({
@@ -170,15 +156,6 @@ const sortTable = (property) => {
       :customerIdUpdate="customerDetail.id"
     />
   </Modal>
-  <!-- Pagination -->
-  <Pagination
-    :totalRecords="totalRecords"
-    :pageNumber="pageNumber"
-    :pageSize="pageSize"
-    :pageSizeOptions="pageSizeOptions"
-    @handleChangePageOption="handleChangePageOption"
-  />
-  <!-- Pagination -->
 </template>
 <style lang="scss">
 .customer-name,
@@ -189,3 +166,4 @@ const sortTable = (property) => {
   }
 }
 </style>
+: number: null: any(: any)(: any)(: any)(: any)(: any)(: any)(: any)(: any)

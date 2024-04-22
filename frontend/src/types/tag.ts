@@ -1,9 +1,4 @@
-export interface TagCreate {
-  id: number;
+export interface Tag {
+  id: number | null;
   tagName: string;
-}
-export interface Tag extends TagCreate {
-  validFlag: boolean;
-  insertDateTime: string;
-  updateDateTime: string;
 }

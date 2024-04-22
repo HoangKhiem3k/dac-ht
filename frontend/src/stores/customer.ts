@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { type Customer } from "@/types/customer";
-import { type CustomerSearchParams } from "@/types/filter";
+import { Customer } from "@/types/customer";
+import { CustomerSearchParams } from "@/types/filter";
 import { useCommonStore } from "@/stores/common";
 import { api } from "@/services/http";
 import { API_BASE_URL } from "@/config";
@@ -14,10 +14,10 @@ export const useCustomerStore = defineStore({
   id: "customerStore",
   state: () => ({
     customers: [] as Customer[],
-    totalCustomers: 0 as Number,
+    totalCustomers: 0 as number,
     searchParams: {
       customerName: "",
-      tagIds: [],
+      tagIds: [] as number[],
       insertDateFrom: "",
       insertDateTo: "",
       updateDateFrom: "",
@@ -35,14 +35,28 @@ export const useCustomerStore = defineStore({
     setSearchParams(params: CustomerSearchParams) {
       this.searchParams = { ...this.searchParams, ...params };
     },
+    setSearchParamsToDefault() {
+      this.searchParams = {
+        customerName: "",
+        tagIds: [],
+        insertDateFrom: "",
+        insertDateTo: "",
+        updateDateFrom: "",
+        updateDateTo: "",
+        pageNum: 0,
+        pageSize: 10,
+        sort: {
+          property: "insertDatetime",
+          asc: false,
+        },
+      };
+    },
     // Get customers list with search params
     async getCustomers() {
       const { setProgressLoading } = useCommonStore();
-      console.log("search params", this.searchParams);
-
       setProgressLoading(true);
       try {
-        const res = await api.post<Customer[]>(
+        const res = await api.post<{ list: Customer[]; total: number }>(
           `${API_BASE_URL}${CUSTOMER_LIST_API_URL}`,
           this.searchParams
         );
@@ -59,7 +73,7 @@ export const useCustomerStore = defineStore({
       }
     },
 
-    async addCustomer(customer: Customer): Customer {
+    async addCustomer(customer: Customer): Promise<void> {
       const { setProgressLoading, setToastSuccess, setToastError } =
         useCommonStore();
       setProgressLoading(true);
@@ -70,7 +84,8 @@ export const useCustomerStore = defineStore({
         );
         if (res.code === API_SUCCESS_STATUS_CODE) {
           setToastSuccess("Added customer successfully.");
-          this.getCustomers();
+          await this.setSearchParamsToDefault();
+          await this.getCustomers();
         } else {
           setToastError(res.message);
         }
@@ -79,7 +94,7 @@ export const useCustomerStore = defineStore({
         console.log(e);
       }
     },
-    async updateCustomer(customer: Customer): Customer {
+    async updateCustomer(customer: Customer): Promise<void> {
       const { setProgressLoading, setToastSuccess, setToastError } =
         useCommonStore();
       setProgressLoading(true);
@@ -88,12 +103,12 @@ export const useCustomerStore = defineStore({
           `${API_BASE_URL}${CUSTOMER_API_URL}${customer.id}`,
           {
             tags: customer.tags,
-            customerName: customer.customerName
+            customerName: customer.customerName,
           }
         );
         if (res.code === API_SUCCESS_STATUS_CODE) {
           setToastSuccess("Updated successfully.");
-          this.getCustomers();
+          await this.getCustomers();
         } else {
           setToastError(res.message);
         }
@@ -102,7 +117,7 @@ export const useCustomerStore = defineStore({
         console.log(e);
       }
     },
-    async deleteCustomer(id) {
+    async deleteCustomer(id: number): Promise<void> {
       const { setProgressLoading, setToastSuccess, setToastError } =
         useCommonStore();
       setProgressLoading(true);
@@ -110,7 +125,7 @@ export const useCustomerStore = defineStore({
         const res = await api.delete(`${API_BASE_URL}${CUSTOMER_API_URL}${id}`);
         if (res.code === API_SUCCESS_STATUS_CODE && res.data === true) {
           setToastSuccess("Deleted successfully.");
-          this.getCustomers();
+          await this.getCustomers();
         } else {
           setToastError(res.message);
         }

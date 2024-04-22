@@ -1,15 +1,8 @@
-import {type Tag, type TagCreate} from '@/types/tag';
+import { type Tag } from "@/types/tag";
 
-export interface CustomerCreate {
-  customerName: string;
-  tags: TagCreate[];
-}
-
-
-export interface Customer extends CustomerCreate  {
+export interface Customer {
   id: number;
   customerName: string;
-  validFlag: boolean;
   insertDateTime: string;
   updateDateTime: string;
   tags: Tag[];
