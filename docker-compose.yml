@@ -1,0 +1,49 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:9.5.21-alpine
+    ports:
+      - "5432:${DATABASE_PORT}"
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DB_USER_NAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+  backend:
+    container_name: ht-backend
+    build: ./backend
+    ports:
+      - "${BACKEND_SERVER_PORT}:8081"
+    environment:
+      - BACKEND_SERVER_PORT=${BACKEND_SERVER_PORT}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      - CONNECTION_TIMEOUT=${CONNECTION_TIMEOUT}
+      - MAXIUM_POOL_SIZE=${MAXIMUM_POOL_SIZE}
+      - DATABASE_IP=${DATABASE_IP}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DB_USER_NAME=${DB_USER_NAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DATABASE_SCHEMA=${DATABASE_SCHEMA}
+      - LOG_FILE_PATH=${LOG_FILE_PATH}
+    depends_on:
+      - postgres
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    ports:
+      - "3000:5000"
+    environment:
+      - API_BASE_URL=${API_BASE_URL}
+    depends_on:
+      - backend
+  nginx:
+    container_name: nginx
+    image: proxy
+    build: ./apprun/nginx
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - 80:80
+      - 443:443

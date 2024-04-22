@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    hikari:
+      connectionTimeout: 30000
+      maximumPoolSize: 5
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: 1234
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: ht
+
+logging:
+  level:
+    root: debug
+    jp.co.ht: debug
+  file:
+    path: C:\ht\log

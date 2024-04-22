@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    hikari:
+      connectionTimeout: ${CONNECTION_TIMEOUT}
+      maximumPoolSize: ${MAXIMUM_POOL_SIZE}
+    url: jdbc:postgresql://${DATABASE_IP}:${DATABASE_PORT}/${DATABASE_NAME}
+    username: ${DB_USER_NAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: ${DATABASE_SCHEMA}
+
+logging:
+  level:
+    root: info
+    jp.co.ht: info
+  file:
+    path: ${LOG_FILE_PATH}

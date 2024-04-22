@@ -1,0 +1,127 @@
+/* semantic color variables for this project */
+
+:root {
+  --color-red: #ff0000;
+  --color-red-1: #f00000;
+  --color-green: #2f9741;
+  --color-green-1: #70ad47;
+  --color-green-2: #94d454;
+  --color-green-3: #c9f2c7;
+  --color-green-4: #abdcd5;
+  --color-green-5: #008000;
+  --color-green-6: #d3fce5;
+  --color-yellow: #ffbf00;
+  --color-yellow-1: #f5d742;
+  --color-orange: orange;
+  --color-orange-1: #c59017;
+  --color-orange-2: #ffc000;
+  --color-blue: #0000ff;
+  --color-blue-1: #178de8;
+  --color-blue-2: #08f;
+  --color-blue-3: #009fe8;
+  --color-blue-4: #61a7cf;
+  --color-blue-5: #9cc4e4;
+  --color-blue-6: #009dde;
+  --color-blue-7: #5fa1db;
+  --color-cyan: #01ddff;
+  --color-light-blue-1: #e6f5fd;
+  --color-light-blue-2: #e8f2fa;
+  --color-purple: #800080;
+  --color-purple-1: #a366dc;
+  --color-purple-2: #af7be1;
+  --color-neutral-0: #ffffff;
+  --color-neutral-1: #f3f6f8;
+  --color-neutral-2: #f1f3f5;
+  --color-neutral-3: #e9ecef;
+  --color-neutral-4: #dee2e6;
+  --color-neutral-5: #c8cbcd;
+  --color-neutral-6: #adb5bd;
+  --color-neutral-7: #868e96;
+  --color-neutral-8: #5c656d;
+  --color-neutral-9: #343a40;
+  --color-neutral-10: #262626;
+  --color-neutral-11: #15181a;
+  --color-gray: #cccccc;
+  --color-gray-1: #a39e9e;
+  --color-gray-2: #646464;
+}
+
+:root {
+  --height-header-1: 56px;
+  --height-footer: 40px;
+  --width-layout-1: 240px;
+  --width-layout-2: 260px;
+  --width-layout-3: 280px;
+  --width-layout-4: 300px;
+  --font-size-1: 13px;
+  --font-size-2: 15px;
+  --font-size-3: 17px;
+  --font-size-4: 19px;
+  --font-size-5: 21px;
+  --font-size-h1: 32px;
+  --font-size-h2: 28px;
+  --font-size-h3: 26px;
+  --font-size-h4: 22px;
+  --font-size-h5: 20px;
+  --font-size-h6: 18px;
+  --font-size-base: 16px;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-s: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-m: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-l: 0 6px 8px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 8px 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  height: 100vh;
+  color: var(--color-neutral-9);
+  background: var(--color-neutral-1);
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.5;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+  font-size: 14px;
+}
+body::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+
+/* total width */
+::-webkit-scrollbar {
+  background-color: #fff;
+  width: 8px;
+  height: 8px;
+}
+
+/* background of the scrollbar except button or resizer */
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+/* scrollbar itself */
+::-webkit-scrollbar-thumb {
+  background-color: #babac0;
+  border-radius: 15px;
+}
+
+/* set button(top and bottom of the scrollbar) */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+.required {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.letter-space-0 {
+  letter-spacing: 0 !important;
+}

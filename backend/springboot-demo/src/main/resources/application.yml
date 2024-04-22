@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: springboot-demo
+  profiles:
+    active: dev
+  messages:
+    basename: messages/Messages

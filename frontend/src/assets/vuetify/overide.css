@@ -1,0 +1,34 @@
+/* modify collaps in posonal panel */
+.personal-portal-panel_content .v-expansion-panel-title {
+    min-height: 50px;
+}
+/* end modify collaps in posonal panel */
+/* modify radio in stg portal */
+.client-budget-list .v-selection-control-group {
+    display: flex;
+}
+/* end modify radio in stg portal */
+
+/* modify date picker */
+
+.v-card {
+    z-index: 9999 !important;
+    overflow: visible !important;
+}
+
+.v3dp_datepicker {
+    position: relative;
+    z-index: 1;
+}
+
+.v3dp__input_wrapper input {
+    border: 1px solid gray;
+    border-radius: 5px;
+    outline: none;
+    text-align: center;
+}
+
+:deep .v3dp__popout {
+    z-index: 9999;
+}
+/* end modify date picker */
